@@ -3,6 +3,17 @@ import ReviewTable from "./ReviewListing";
 import { listRivews } from "../config/services/review";
 import Pagination from "../components/CustomPagination";
 
+const debounce = (func, delay) => {
+  let timeoutId;
+  return function (...args) {
+    const context = this;
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(context, args);
+    }, delay);
+  };
+};
+
 const ReviewManagement = () => {
   const [pageNo, setPagination] = useState(1);
   const [itemsPerPage] = useState(10);
@@ -12,23 +23,40 @@ const ReviewManagement = () => {
   const [searchBy, setSearchBy] = useState("");
   const [reviewsList, setReviewsList] = useState([]);
 
-  const getRivewList = () => {
-    let params = {};
-    setLoading(true);
-    setLastPage(false);
-    listRivews(params)
-      .then((res) => {
-        console.log(res, "............res");
-        let list = res?.data?.data;
+  const getReviewList = async () => {
+    let params = {
+      pageNo: (pageNo - 1),
+      count: itemsPerPage,
+      search: search,
+    };
+    try {
+      setLastPage(false);
+      let result = await listRivews(params);
+      let list = result?.data?.data;
+      if (list?.length > 0) {
         setReviewsList(list);
-        if (res?.data?.part_variants.length < itemsPerPage) setLastPage(true);
-        setLoading(false);
-      })
-      .catch((err) => console.error(err));
+        if (list?.length < itemsPerPage) setLastPage(true);
+      } else {
+        setReviewsList([]);
+        setLastPage(true);
+      }
+    } catch (err) {
+      console.error("Error occurred while fetching reviews:", err);
+    }
   };
 
+  const handleSearch = (e) => {
+    let value = e?.target?.value;
+    console.log(value, 'value')
+    let finalValue = value.trim()
+    if (finalValue !== "") setSearchValue(finalValue);
+    else setSearchValue("")
+
+  };
+  const debouncedHandleSearch = debounce(handleSearch, 800);
+
   useEffect(() => {
-    getRivewList();
+    getReviewList();
   }, [itemsPerPage, search, pageNo]);
 
   return (
@@ -45,7 +73,7 @@ const ReviewManagement = () => {
               }}
             >
               <div class="left">
-                <h3>Manage Reviews</h3>
+                <h3>Review Listing</h3>
               </div>
               <div class="right">
                 <a href="/add-review">
@@ -55,18 +83,18 @@ const ReviewManagement = () => {
             </div>
             <input
               style={{ marginBottom: "20px" }}
-              class="inputRounded search-input width-auto"
+              class="inputRounded search-input width-100"
               type="search"
               placeholder="Search By Title"
-              oninput="handleSearch(event)"
               maxlength="100"
+              onChange={debouncedHandleSearch}
             />
             <div id="loader"></div>
             <div id="hardwarePartVariantTable">
-              <ReviewTable options={reviewsList} getRivewList={getRivewList} />
+              <ReviewTable options={reviewsList} getReviewList={getReviewList} />
             </div>
           </div>
-          <div class="center cm_pagination">
+          <div class="pagination">
             <div id="pagination">
               <Pagination
                 pageNo={pageNo}
