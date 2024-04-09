@@ -1,6 +1,7 @@
-const express = require("express");
+import express from "express";
 const reviewRouter = express.Router();
-const reviewFunctions = require("../functions/reviewFunctions.js");
+import reviewFunctions from "../functions/reviewFunctions.js";
+
 
 reviewRouter.post("/new", async (req, res) => {
   let result = await reviewFunctions.addReview(req);
@@ -8,7 +9,8 @@ reviewRouter.post("/new", async (req, res) => {
 });
 
 reviewRouter.get("/get", async (req, res) => {
-  let result = await reviewFunctions.getReview(req);
+   let params = req?.query;
+  let result = await reviewFunctions.getReview(params);
   res.status(result?.code).send(result);
 });
 
@@ -22,4 +24,4 @@ reviewRouter.delete("/:id", async (req, res) => {
   res.status(result?.code).send(result);
 });
 
-module.exports = reviewRouter;
+export default reviewRouter;

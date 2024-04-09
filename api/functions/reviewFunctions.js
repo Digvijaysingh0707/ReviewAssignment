@@ -1,10 +1,10 @@
 let reviewFunctions = new Object();
-const Review =require("../controllers/reviewController.js");
-const appHelper =require("../helper/appHelper.js");
+import reviewdal from "../controllers/reviewController.js";
+import appHelper from "../helper/appHelper.js";
 
 reviewFunctions.addReview = async (req) => {
   try {
-    let review = await Review.addReview(req);
+    let review = await reviewdal.addReview(req);
     if (!review.status) {
       return appHelper.apiResponse(404, false, review?.message);
     }
@@ -18,9 +18,9 @@ reviewFunctions.addReview = async (req) => {
   }
 };
 
-reviewFunctions.getReview = async (req) => {
+reviewFunctions.getReview = async (params) => {
   try {
-    let review = await Review.getReview(req);
+    let review = await reviewdal.getReview(params);
     if (!review.status) {
       return appHelper.apiResponse(404, false, review?.message);
     }
@@ -36,7 +36,7 @@ reviewFunctions.getReview = async (req) => {
 
 reviewFunctions.deleteReview = async (req) => {
   try {
-    let review = await Review.deleteReview(req);
+    let review = await reviewdal.deleteReview(req);
     if (!review.status) {
       return appHelper.apiResponse(404, false, review?.message);
     }
@@ -52,7 +52,8 @@ reviewFunctions.deleteReview = async (req) => {
 
 reviewFunctions.updateReview = async (req) => {
   try {
-    let review = await Review.updateReview(req);
+    
+    let review = await reviewdal.updateReview(req);
     if (!review.status) {
       return appHelper.apiResponse(404, false, review?.message);
     }
@@ -66,4 +67,4 @@ reviewFunctions.updateReview = async (req) => {
   }
 };
 
-module.exports = reviewFunctions
+export default reviewFunctions;

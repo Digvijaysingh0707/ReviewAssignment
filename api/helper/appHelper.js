@@ -15,4 +15,4 @@ appHelper.apiResponse = (resStatusCode, resStatus, resMessageKey, resData) => {
   return JSON.parse(JSON.stringify(res));
 };
 
-module.exports = appHelper
+export default appHelper;
