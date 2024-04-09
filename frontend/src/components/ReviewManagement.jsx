@@ -84,7 +84,7 @@ const ReviewManagement = () => {
               </div>
               <div class="right">
                 <a href="/add-review">
-                  <div class="submitBtn">Create</div>
+                  <div class="submitBtn">Create<span>→</span></div>
                 </a>
               </div>
             </div>
