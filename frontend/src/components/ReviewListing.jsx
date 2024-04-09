@@ -22,10 +22,10 @@ const ReviewListing = ({ options, getReviewList }) => {
 
      const res = await deleteReview(params);
      if (res?.status === 200) {
-       toast.success("Entry deleted successfully!");
+       toast.success("Entry deleted successfully!",{duration:5000});
        await getReviewList();
      } else {
-       toast.error("Entry not Deleted");
+       toast.error("Entry not Deleted",{duration:5000});
      }
    } catch (error) {
      console.error("Error deleting review:", error);
