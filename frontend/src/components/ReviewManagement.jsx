@@ -20,7 +20,6 @@ const ReviewManagement = () => {
   const [search, setSearchValue] = useState("");
   const [lastPage, setLastPage] = useState(false);
   const [loader, setLoading] = useState(false);
-  const [searchBy, setSearchBy] = useState("");
   const [reviewsList, setReviewsList] = useState([]);
   const [sortObj, setSortObj] = useState({ sortKey: 'updatedAt', sortOrder: 'desc' })
 
@@ -33,6 +32,7 @@ const ReviewManagement = () => {
     };
     try {
       setLastPage(false);
+      setLoading(true)
       let result = await listRivews(params);
       let list = result?.data?.data;
       if (list?.length > 0) {
@@ -44,6 +44,9 @@ const ReviewManagement = () => {
       }
     } catch (err) {
       console.error("Error occurred while fetching reviews:", err);
+    }
+    finally {
+      setLoading(false)
     }
   };
 
@@ -98,7 +101,12 @@ const ReviewManagement = () => {
             />
             <div id="loader"></div>
             <div id="hardwarePartVariantTable">
-              <ReviewTable pageNo={pageNo} itemsPerPage={itemsPerPage} options={reviewsList} getReviewList={getReviewList} handleSort={handleSort} sortObj={sortObj} />
+              {loader ?
+                "Loading...."
+                :
+
+                <ReviewTable pageNo={pageNo} itemsPerPage={itemsPerPage} options={reviewsList} getReviewList={getReviewList} handleSort={handleSort} sortObj={sortObj} />
+              }
             </div>
           </div>
           <div class="pagination">
