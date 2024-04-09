@@ -34,24 +34,24 @@
 .form_icon {
   display: flex;
   align-items: center;
-  background-color: #007bff;
-  color: white;
+  background-color: #FFD100;
+  color: black;
   border: none;
   padding: 8px 12px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
-.form_icon:hover {
+/* .form_icon:hover {
   background-color: #0056b3;
-}
+} */
 
 .form_icon img {
   margin-left: 5px;
 }
 
 /* Optional: Add margin to buttons for better spacing */
-.form_icon + .form_icon {
+.form_icon+.form_icon {
   margin-left: 5px;
 }
 
@@ -87,16 +87,16 @@
 .submitBtn {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #FFD100;
+  color: black;
   border-radius: 4px;
   text-decoration: none;
   transition: background-color 0.3s;
 }
 
-.submitBtn:hover {
+/* .submitBtn:hover {
   background-color: #0056b3;
-}
+} */
 
 .search-input {
   width: 100%;
@@ -117,9 +117,9 @@
 } */
 .pagination {
   display: flex;
-   justify-content: center;
-   
- }
+  justify-content: center;
+
+}
 
 .pagination-btn {
   background-color: #007bff;
@@ -142,77 +142,76 @@
 }
 
 .form-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .review-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .label-field {
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .input-field {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .submit-button,
-  .reset-button,
-  .cancel-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .submit-button {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  .reset-button,
-  .cancel-button {
-    background-color: #ccc;
-  }
-  
-  .submit-button:hover,
-  .reset-button:hover,
-  .cancel-button:hover {
-    background-color: #0056b3;
-  }
-  
-  .arrowFilterDesign{
-    display: inline-flex;
-    flex-direction: column;
-    margin-left: 10px;
-    
-  }
-  .arrowFilterDesign .upArrow{
-    height: 8px;
-    width: 10px;
-    margin-bottom: 2px;
-  }
-  .arrowFilterDesign .downArrow{
-    margin-top: 3px;
-    height: 8px;
-    width: 10px;
-  }
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.label-field {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.button-container {
+   display: flex; 
+  justify-content:space-between;
+}
+
+.submit-button,
+.reset-button,
+.cancel-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button {
+  background-color: #FFD100;
+  color: black
+}
+
+.reset-button,
+.cancel-button {
+  background-color: #ccc;
+}
+
+.submit-button:hover,
+.reset-button:hover,
+
+.arrowFilterDesign {
+  display: inline-flex;
+  flex-direction: column;
+  margin-left: 10px;
+
+}
+
+.arrowFilterDesign .upArrow {
+  height: 8px;
+  width: 10px;
+  margin-bottom: 2px;
+}
+
+.arrowFilterDesign .downArrow {
+  margin-top: 3px;
+  height: 8px;
+  width: 10px;
+}
