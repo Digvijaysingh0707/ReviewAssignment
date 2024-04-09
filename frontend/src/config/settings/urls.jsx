@@ -1,6 +1,6 @@
 export const endPoint = {
   url: {
-    Apiurl: "http://localhost:6060",
+    Apiurl: "http://localhost:3001",
   },
   review: {
     getData: "/review/get",

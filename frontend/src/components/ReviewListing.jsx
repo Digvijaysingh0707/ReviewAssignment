@@ -1,12 +1,10 @@
 import React from "react";
 import moment from "moment";
-import EditIcon from "../assests/edit-icon.svg";
-import DeleteIcon from "../assests/delete-icon.svg";
 import { deleteReview } from "../config/services/review";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-const ReviewListing = ({ options, getRivewList }) => {
+const ReviewListing = ({ options, getReviewList }) => {
 
   const navigate = useNavigate();
   const handleEditClick = (row) => {
@@ -25,7 +23,7 @@ const ReviewListing = ({ options, getRivewList }) => {
      const res = await deleteReview(params);
      if (res?.status === 200) {
        toast.success("Entry deleted successfully!");
-       await getRivewList();
+       await getReviewList();
      } else {
        toast.error("Entry not Deleted");
      }
@@ -65,14 +63,12 @@ const ReviewListing = ({ options, getRivewList }) => {
                     onClick={() => handleEditClick(row)}
                   >
                     Edit
-                    <img src={EditIcon} alt="" />
                   </button>
                   <button
                     className="form_icon"
                     onClick={() => handleDelete(row)}
                   >
                     Delete
-                    <img src={DeleteIcon} alt="" />
                   </button>
                 </td>
               </tr>
