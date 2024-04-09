@@ -7,7 +7,7 @@ import UpArrow from '../assests/arrowUp.svg'
 import DownArrow from '../assests/arrowDown.svg'
 
 
-const ReviewListing = ({ options, getReviewList, handleSort, sortObj }) => {
+const ReviewListing = ({ pageNo, itemsPerPage, options, getReviewList, handleSort, sortObj }) => {
 
 
   const handleSortIcons = (key) => {
@@ -71,7 +71,7 @@ const ReviewListing = ({ options, getReviewList, handleSort, sortObj }) => {
             options.length > 0 &&
             options.map((row, i) => (
               <tr key={i}>
-                <td>{i + 1}</td>
+                <td>{(i + 1) + ((pageNo - 1) * itemsPerPage)}</td>
                 <td>{row?.title}</td>
                 <td>{row?.content}</td>
                 <td>{moment(row?.createdAt).format("DD-MM-YYYY (HH:mm A)")}</td>

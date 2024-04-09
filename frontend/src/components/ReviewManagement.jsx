@@ -98,7 +98,7 @@ const ReviewManagement = () => {
             />
             <div id="loader"></div>
             <div id="hardwarePartVariantTable">
-              <ReviewTable options={reviewsList} getReviewList={getReviewList} handleSort={handleSort} sortObj={sortObj} />
+              <ReviewTable pageNo={pageNo} itemsPerPage={itemsPerPage} options={reviewsList} getReviewList={getReviewList} handleSort={handleSort} sortObj={sortObj} />
             </div>
           </div>
           <div class="pagination">
