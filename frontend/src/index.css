@@ -200,3 +200,19 @@
     background-color: #0056b3;
   }
   
+  .arrowFilterDesign{
+    display: inline-flex;
+    flex-direction: column;
+    margin-left: 10px;
+    
+  }
+  .arrowFilterDesign .upArrow{
+    height: 8px;
+    width: 10px;
+    margin-bottom: 2px;
+  }
+  .arrowFilterDesign .downArrow{
+    margin-top: 3px;
+    height: 8px;
+    width: 10px;
+  }

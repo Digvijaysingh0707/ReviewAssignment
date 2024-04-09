@@ -43,8 +43,10 @@ reviewdal.addReview = async (req) => {
 
 reviewdal.getReview = async (params) => {
   let query = { isDeleted: false };
-  let { pageNo, count, sortKey, sortOrder, search } = params;
-  let sort = { createdAt: -1 };
+  let { pageNo, count, search, sortOrder, sortKey } = params;
+  let sort = { updatedAt: -1 };
+
+  console.log(params, 'params');
 
   if (search) {
     query = {
@@ -54,7 +56,7 @@ reviewdal.getReview = async (params) => {
   }
 
   if (sortKey && sortOrder) {
-    sort = { [sortKey]: sortOrder };
+    sort = { [sortKey]: sortOrder === "asc" ? 1 : -1 };
   }
 
   if (isEmptyValue(pageNo)) {
@@ -82,10 +84,11 @@ reviewdal.getReview = async (params) => {
 
 
 
+
 reviewdal.updateReview = async (req) => {
   try {
-      const { title, content } = req?.body;
-      const reviewId = req.params["id"];
+    const { title, content } = req?.body;
+    const reviewId = req.params["id"];
     if (!title || !content) {
       return {
         status: false,
@@ -95,17 +98,17 @@ reviewdal.updateReview = async (req) => {
 
     let query = {};
     let update = {};
-      let options = { new: true };
-      
-      query._id = reviewId;
-      
-      if (title) {
-        update.title = title;
-      }
+    let options = { new: true };
 
-      if (content) {
-        update.content = content;
-      }
+    query._id = reviewId;
+
+    if (title) {
+      update.title = title;
+    }
+
+    if (content) {
+      update.content = content;
+    }
 
     const updatedReview = await Review.findOneAndUpdate(
       query,

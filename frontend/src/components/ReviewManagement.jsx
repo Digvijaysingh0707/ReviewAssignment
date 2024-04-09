@@ -22,12 +22,14 @@ const ReviewManagement = () => {
   const [loader, setLoading] = useState(false);
   const [searchBy, setSearchBy] = useState("");
   const [reviewsList, setReviewsList] = useState([]);
+  const [sortObj, setSortObj] = useState({ sortKey: 'updatedAt', sortOrder: 'desc' })
 
   const getReviewList = async () => {
     let params = {
       pageNo: (pageNo - 1),
       count: itemsPerPage,
       search: search,
+      ...sortObj
     };
     try {
       setLastPage(false);
@@ -45,6 +47,11 @@ const ReviewManagement = () => {
     }
   };
 
+  const handleSort = (key) => {
+    let newOrder = sortObj?.sortOrder === 'desc' ? 'asc' : 'desc'
+    setSortObj({ sortKey: key, sortOrder: newOrder })
+  }
+
   const handleSearch = (e) => {
     let value = e?.target?.value;
     console.log(value, 'value')
@@ -57,7 +64,7 @@ const ReviewManagement = () => {
 
   useEffect(() => {
     getReviewList();
-  }, [itemsPerPage, search, pageNo]);
+  }, [itemsPerPage, search, pageNo, sortObj]);
 
   return (
     <>
@@ -91,7 +98,7 @@ const ReviewManagement = () => {
             />
             <div id="loader"></div>
             <div id="hardwarePartVariantTable">
-              <ReviewTable options={reviewsList} getReviewList={getReviewList} />
+              <ReviewTable options={reviewsList} getReviewList={getReviewList} handleSort={handleSort} sortObj={sortObj} />
             </div>
           </div>
           <div class="pagination">
